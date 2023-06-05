@@ -1,0 +1,68 @@
+.<div class="card text-dark">
+    
+
+    
+  <div class="card-body" >
+    <!-- <div *ngIf="errorMessage" class="alert alert-danger">
+        {{errorMessage.message}}
+    </div> -->
+    <ng-container *ngIf="customers | async as lisCustomers; else failureOrlaoding">
+        <div *ngIf="searchFormGroup">
+            <form [formGroup]="searchFormGroup" (ngSubmit)="handleSearchCustomer()">
+              <div class="row mb-3" >
+                <div class="col-8">
+                    <div class="form-group">
+                        <input type="text" class="form-control" formControlName="keyword" id="keyword" placeholder="search ...">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-outline-info" ngC>
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="table-responsive"  >
+            <!-- *ngIf="customers"
+            > -->
+                <table class="table ">
+                    <thead> 
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <tr class="" *ngFor="let customer of lisCustomers">
+                            <td>{{ customer.name }}</td>
+                            <td>{{ customer.email }}</td>
+                            <td>
+                                <button class="btn btn-outline-danger m-2"
+                                    (click)="handleDeleteCustomer(customer)"    
+                                >
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                                <button class="btn btn-outline-warning">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    </ng-container>
+    <ng-template #failureOrlaoding >
+        <ng-container *ngIf="errorMessage; else loading">
+            <div class="alert alert-danger">
+                {{errorMessage.message}}
+            </div>
+        </ng-container>
+        <ng-template #loading>
+            Loding ...
+        </ng-template>
+    </ng-template>
+    
+  </div>
+</div>
