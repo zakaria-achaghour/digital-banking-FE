@@ -1,0 +1,43 @@
+<div class="container">
+
+    <div class="card col-md-6 offset-3 mt-3">
+        <div class="card-header text-center bg-info"> NEW Customer</div>
+      <div class="card-body">
+        <form [formGroup]="customerForm" (ngSubmit)="handleSaveCustomer()">
+            <div class="form-group">
+                <label for="">Name</label>
+                <input type="text" 
+                    formControlName="name"
+                    class="form-control" id="name"  aria-describedby="nameHelpId">
+                <span class="text-danger" *ngIf="customerForm.get('name')!.invalid && customerForm.get('name')!.touched">Please enter a name.</span>
+                
+                
+            </div>
+            <div class="form-group">
+                <label for="">Email</label>
+                <input type="email" 
+                formControlName="email"
+                class="form-control" id="email" aria-describedby="emailHelpId">
+                <!-- <span class="text-danger" 
+                *ngIf="customerForm.get('email')!.invalid && customerForm.get('email')!.touched"
+                >Please enter a valid email.</span> -->
+                <span class="text-danger" 
+                *ngIf="customerForm.controls['email'].touched 
+                && customerForm.controls['email'].errors
+                && customerForm.controls['email'].errors!['required']
+                "
+                >Please enter a valid email.</span>
+            </div>
+            <div class="form-group">
+              <label for="">Date of Birth</label>
+              <input type="date"
+              formControlName="birthDate"
+              id="birthDate" class="form-control" aria-describedby="dateHelpId">
+              <span class="text-danger" *ngIf="customerForm.get('birthDate')!.invalid && customerForm.get('birthDate')!.touched">Please Select a valid date of birth.</span>
+            </div>   
+            <input class="btn btn-outline-success mt-2"  [disabled]="!customerForm.valid" type="submit" value="Save">
+        </form>
+        
+      </div>
+    </div>
+</div>
