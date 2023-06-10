@@ -4,6 +4,7 @@ import { CustomersService } from '../services/customers.service';
 import { Error } from '../models/Error.model';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -17,7 +18,7 @@ export class CustomersComponent implements OnInit {
   // errorMessage: string | undefined; 
   errorMessage!: Error; 
   searchFormGroup : FormGroup | undefined;
-  constructor(private customerService: CustomersService, private formBuilder: FormBuilder) {}
+  constructor(private customerService: CustomersService, private formBuilder: FormBuilder, private router : Router) {}
 
   ngOnInit(): void {
     // validation of inputs fielad simple with reactive form
@@ -76,5 +77,9 @@ export class CustomersComponent implements OnInit {
         console.log(err);
       } 
     })
+  }
+
+  handleCustomerAccounts(customer: Customer) {
+    this.router.navigateByUrl("/customer-accounts/"+customer.id,{state :customer});
   }
 }
