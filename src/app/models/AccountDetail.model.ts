@@ -1,10 +1,10 @@
 export interface AccountDetail {
     accountId: string;
     balance: number,
-    createdAt: Date,
-    status: string,
-    overDraft: number,
-    accountOperation: AccountOperation[];
+    currentPage: number,
+    totalPages: number,
+    pageSize: number,
+    accountOperationDTOS: AccountOperation[];
 }
 export interface AccountOperation {
     id: string;
